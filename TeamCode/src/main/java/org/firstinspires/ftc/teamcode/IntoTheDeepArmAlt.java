@@ -32,29 +32,29 @@ public class IntoTheDeepArmAlt extends LinearOpMode {
             //MECHANISM CODE
 
             if (gamepad1.a) {
-                ArmTarget = 0; //On the ground for starting and intaking
+                rotTarget = 0; //On the ground for starting and intaking
             }
             else if (gamepad1.x) {
-                ArmTarget = 120; //Low level on the goal
+                rotTarget = 120; //Low level on the goal
             }
             else if (gamepad1.y) {
-                ArmTarget = 260; //Mid level on the goal
+                rotTarget = 260; //Mid level on the goal
             }
             else if (gamepad1.b) {
-                ArmTarget = 410; //High level on the goal
+                rotTarget = 410; //High level on the goal
             }
             else if (gamepad1.right_bumper) {
-                ArmTarget = 1420; //High level on the goal scoring backwards
+                rotTarget = 1420; //High level on the goal scoring backwards
             }
             else if (gamepad1.left_bumper) {
-                ArmTarget = 1570; //Mid level on the goal scoring backwards
+                rotTarget = 1570; //Mid level on the goal scoring backwards
             }
 
             //stuff for arm position control
-            rotateArm.setTargetPosition(ArmTarget);
+            rotateArm.setTargetPosition(rotTarget);
             rotateArm.setPower(1);
 
-            telemetry.addData("Arm Position", ArmMotor.getCurrentPosition());
+            telemetry.addData("Arm Position", rotateArm.getCurrentPosition());
             telemetry.update();
         }
     }
