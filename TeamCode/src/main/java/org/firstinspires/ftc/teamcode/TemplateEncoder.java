@@ -131,7 +131,7 @@ public class TemplateEncoder extends LinearOpMode {
         sleep(250);
         encoderDrive(DRIVE_SPEED,   -20, -20, 5.0);
         sleep(250);
-        encoderDrive(TURN_SPEED, -12, 12, 5.0);
+        encoderDrive(TURN_SPEED, -16, 16, 5.0);
         sleep(250);
         encoderDrive(DRIVE_SPEED, 50, 50, 5.0);
         sleep(250);
