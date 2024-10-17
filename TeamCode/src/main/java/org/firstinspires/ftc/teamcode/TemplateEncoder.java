@@ -60,7 +60,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Red Right", group="Shame")
+@Autonomous(name="Red Right No Arm", group="Shame")
 
 public class TemplateEncoder extends LinearOpMode {
 
@@ -127,15 +127,14 @@ public class TemplateEncoder extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  48,  48, 5.0);
+        encoderDrive(DRIVE_SPEED,  25,  25, 5.0);
         sleep(250);
-        encoderDrive(TURN_SPEED,   20, -20, 4.0);
+        encoderDrive(DRIVE_SPEED,   -20, -20, 5.0);
         sleep(250);
-        encoderDrive(DRIVE_SPEED, 60, 60, 5.0);
+        encoderDrive(TURN_SPEED, -16, 16, 5.0);
         sleep(250);
-        encoderDrive(TURN_SPEED, 20, -20, 5.0);
+        encoderDrive(DRIVE_SPEED, 50, 50, 5.0);
         sleep(250);
-        encoderDrive(DRIVE_SPEED, 48, 48, 5.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -181,7 +180,7 @@ public class TemplateEncoder extends LinearOpMode {
             LFMotor.setPower(Math.abs(speed));
             RFMotor.setPower(Math.abs(speed));
             LBMotor.setPower(Math.abs(speed));
-            RBMotor.setPower(Math.abs(speed));
+            RBMotor.setPower(Math.abs(speed * .9));
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
