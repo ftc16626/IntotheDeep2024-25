@@ -62,13 +62,15 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name="Red Right", group="Shame")
 
-public class TemplateEncoder extends LinearOpMode {
+public class EncoderWithArm extends LinearOpMode {
 
     /* Declare OpMode members. */
     private DcMotor         LFMotor   = null;
     private DcMotor         RFMotor  = null;
     private DcMotor         LBMotor   = null;
     private DcMotor         RBMotor  = null;
+    private DcMotor         rotateArm = null;
+    private DcMotor         extendArm = null;
 
     private ElapsedTime     runtime = new ElapsedTime();
 
@@ -94,6 +96,8 @@ public class TemplateEncoder extends LinearOpMode {
         LBMotor = hardwareMap.get(DcMotor.class, "LBMotor");
         RFMotor = hardwareMap.get(DcMotor.class, "RFMotor");
         RBMotor = hardwareMap.get(DcMotor.class, "RBMotor");
+        rotateArm = hardwareMap.get(DcMotor.class, "rotateArm");
+        extendArm = hardwareMap.get(DcMotor.class, "extendArm");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
@@ -102,26 +106,36 @@ public class TemplateEncoder extends LinearOpMode {
         LBMotor.setDirection(DcMotor.Direction.FORWARD);
         RFMotor.setDirection(DcMotor.Direction.REVERSE);
         RBMotor.setDirection(DcMotor.Direction.FORWARD);
+        rotateArm.setDirection(DcMotor.Direction.FORWARD);
+        extendArm.setDirection(DcMotor.Direction.FORWARD);
 
         LFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         LBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rotateArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        extendArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
         LFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         LBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rotateArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        extendArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Starting at",  "%7d :%7d",
                           LFMotor.getCurrentPosition(),
                           LBMotor.getCurrentPosition(),
                           RFMotor.getCurrentPosition(),
-                          RBMotor.getCurrentPosition());
+                          RBMotor.getCurrentPosition(),
+                          rotateArm.getCurrentPosition(),
+                          extendArm.getCurrentPosition());
         telemetry.update();
-
+        rotateArm.setTargetPosition(300);
+        rotateArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rotateArm.setPower(Math.abs(.5));
         // Wait for the game to start (driver presses START)
         waitForStart();
 
@@ -129,6 +143,10 @@ public class TemplateEncoder extends LinearOpMode {
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
         encoderDrive(DRIVE_SPEED,  48,  48, 5.0);
         sleep(250);
+        rotateArm.setTargetPosition(300);
+        rotateArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rotateArm.setPower(Math.abs(.5));
+        sleep(500);
         encoderDrive(TURN_SPEED,   20, -20, 4.0);
         sleep(250);
         encoderDrive(DRIVE_SPEED, 60, 60, 5.0);

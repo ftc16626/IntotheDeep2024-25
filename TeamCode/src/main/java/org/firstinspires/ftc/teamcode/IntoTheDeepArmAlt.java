@@ -15,8 +15,8 @@ public class IntoTheDeepArmAlt extends LinearOpMode {
     @Override
     public void runOpMode() {
         rotateArm = hardwareMap.get(DcMotor.class, "rotateArm");
-        rotateArm.setTargetPosition(0);
         rotateArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rotateArm.setTargetPosition(0);
 
         rotateArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
