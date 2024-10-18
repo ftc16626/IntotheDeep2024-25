@@ -133,9 +133,9 @@ public class EncoderWithArm extends LinearOpMode {
                           rotateArm.getCurrentPosition(),
                           extendArm.getCurrentPosition());
         telemetry.update();
-        rotateArm.setTargetPosition(300);
+        rotateArm.setTargetPosition(200);
         rotateArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rotateArm.setPower(Math.abs(.5));
+        rotateArm.setPower(.5);
         // Wait for the game to start (driver presses START)
         waitForStart();
 

@@ -180,7 +180,7 @@ public class TemplateEncoder extends LinearOpMode {
             LFMotor.setPower(Math.abs(speed));
             RFMotor.setPower(Math.abs(speed));
             LBMotor.setPower(Math.abs(speed));
-            RBMotor.setPower(Math.abs(speed * .9));
+            RBMotor.setPower(Math.abs(speed));
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
