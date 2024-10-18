@@ -68,10 +68,12 @@ public class MechanumDrive extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftFrontDrive = null;
-    private DcMotor leftBackDrive = null;
-    private DcMotor rightFrontDrive = null;
-    private DcMotor rightBackDrive = null;
+    private DcMotor LFMotor = null;
+    private DcMotor LBMotor = null;
+    private DcMotor RFMotor = null;
+    private DcMotor RBMotor = null;
+    private DcMotor rotateArm = null;
+    private DcMotor extendArm = null;
     CRServo Wheel1;
     CRServo Wheel2;
 
@@ -80,10 +82,12 @@ public class MechanumDrive extends LinearOpMode {
 
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
-        leftFrontDrive  = hardwareMap.get(DcMotor.class, "LFMotor");
-        leftBackDrive  = hardwareMap.get(DcMotor.class, "LBMotor");
-        rightFrontDrive = hardwareMap.get(DcMotor.class, "RFMotor");
-        rightBackDrive = hardwareMap.get(DcMotor.class, "RBMotor");
+        LFMotor  = hardwareMap.get(DcMotor.class, "LFMotor");
+        LBMotor  = hardwareMap.get(DcMotor.class, "LBMotor");
+        RFMotor = hardwareMap.get(DcMotor.class, "RFMotor");
+        RBMotor = hardwareMap.get(DcMotor.class, "RBMotor");
+        rotateArm = hardwareMap.get(DcMotor.class, "rotateArm");
+        extendArm = hardwareMap.get(DcMotor.class, "extendArm");
         Wheel1 = hardwareMap.get(CRServo.class, "Wheel1");
         Wheel1.resetDeviceConfigurationForOpMode();
         Wheel2 = hardwareMap.get(CRServo.class, "Wheel2");
@@ -99,10 +103,12 @@ public class MechanumDrive extends LinearOpMode {
         // when you first test your robot, push the left joystick forward and observe the direction the wheels turn.
         // Reverse the direction (flip FORWARD <-> REVERSE ) of any wheel that runs backward
         // Keep testing until ALL the wheels move the robot forward when you push the left joystick forward.
-        leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
-        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        LFMotor.setDirection(DcMotor.Direction.FORWARD);
+        LBMotor.setDirection(DcMotor.Direction.FORWARD);
+        RFMotor.setDirection(DcMotor.Direction.REVERSE);
+        RBMotor.setDirection(DcMotor.Direction.FORWARD);
+        rotateArm.setDirection(DcMotor.Direction.FORWARD);
+        extendArm.setDirection(DcMotor.Direction.FORWARD);
 
         // Wait for the game to start (driver presses PLAY)
         telemetry.addData("Status", "Initialized");
@@ -116,9 +122,9 @@ public class MechanumDrive extends LinearOpMode {
             double max;
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-            double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-            double lateral =  gamepad1.left_stick_x;
-            double yaw     =  gamepad1.right_stick_x;
+            double axial   = gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
+            double lateral =  -gamepad1.left_stick_x;
+            double yaw     =  -gamepad1.right_stick_x;
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
@@ -142,27 +148,29 @@ public class MechanumDrive extends LinearOpMode {
 
  // Wheel 1 is left servo motor (facing front of motor)
 
-            if (gamepad1.dpad_up) {
-                Wheel1.setPower(-0.8);
-                Wheel2.setPower(0.8);
+            if (gamepad2.dpad_down) {
+                Wheel1.setPower(-1);
+                Wheel2.setPower(0.9);
             }  else {
                 Wheel1.setPower(0);
                 Wheel2.setPower(0);
             }
 
-            if (gamepad1.dpad_down) {
-                Wheel1.setPower(0.8);
-                Wheel2.setPower(-0.8);
+            if (gamepad2.dpad_up) {
+                Wheel1.setPower(1);
+                Wheel2.setPower(-0.9);
             }  else {
                 Wheel1.setPower(0);
                 Wheel2.setPower(0);
             }
 
             // Send calculated power to wheels
-            leftFrontDrive.setPower(leftFrontPower);
-            rightFrontDrive.setPower(rightFrontPower);
-            leftBackDrive.setPower(leftBackPower);
-            rightBackDrive.setPower(rightBackPower);
+            LFMotor.setPower(leftFrontPower);
+            RFMotor.setPower(rightFrontPower);
+            LBMotor.setPower(leftBackPower);
+            RBMotor.setPower(rightBackPower);
+            rotateArm.setPower(gamepad2.left_stick_y);
+            extendArm.setPower(gamepad2.right_stick_y);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());

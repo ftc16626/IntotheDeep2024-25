@@ -60,9 +60,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Template Encoder", group="Shame")
+@Autonomous(name="Red Right", group="Shame")
 
-public class TemplateEncoder extends LinearOpMode {
+public class RedRight extends LinearOpMode {
 
     /* Declare OpMode members. */
     private DcMotor         LFMotor   = null;
@@ -131,7 +131,7 @@ public class TemplateEncoder extends LinearOpMode {
         sleep(250);
         encoderDrive(DRIVE_SPEED,   -20, -20, 5.0);
         sleep(250);
-        encoderDrive(TURN_SPEED, 16, 16, 5.0);
+        encoderDrive(TURN_SPEED, 25, -25, 5.0);
         sleep(250);
         encoderDrive(DRIVE_SPEED, 50, 50, 5.0);
         sleep(250);
