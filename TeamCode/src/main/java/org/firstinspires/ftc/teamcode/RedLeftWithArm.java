@@ -154,7 +154,9 @@ public class RedLeftWithArm extends LinearOpMode {
             LBMotor.setTargetPosition(newLBTarget);
             RBMotor.setTargetPosition(newRBTarget);
             rotateArm.setTargetPosition(newROTarget);
+            rotateArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             extendArm.setTargetPosition(newEXTarget);
+            extendArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             // Turn On RUN_TO_POSITION
             LFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
