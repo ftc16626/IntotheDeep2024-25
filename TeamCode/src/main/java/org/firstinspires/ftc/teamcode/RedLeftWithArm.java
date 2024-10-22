@@ -100,7 +100,7 @@ public class RedLeftWithArm extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  21,  21, 0, 0, 0,0, 5.0); // Forward
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  23,  23, 0, 0, 0,0, 5.0); // Forward
 
         encoderDrive(TURN_SPEED, ROT_SPEED,  25, -25,0,0,0,0, 5.0); // Turn right
 
@@ -108,11 +108,11 @@ public class RedLeftWithArm extends LinearOpMode {
 
         encoderDrive(TURN_SPEED, ROT_SPEED, -25, 25,0,0,0,0, 5.0); // Turn left
 
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 4, 4, 185, 0,0,0,5.0); // Rotate Arm
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 5.5, 5.5, 185, 0,0,0,5.0); // Rotate Arm
 
         encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 11.25,0,0,5.0); // Extend Arm
 
-        encoderDrive(.1, .1, 0, 0, -30, -2.25,-1,1,5.0); // Small Lower
+        encoderDrive(.1, .1, 0, 0, -32, -3.75,-1,1,5.0); // Small Lower
 
         encoderDrive(.1, .1,  -20, -20,-90,-10,-1,1,  5.0); // Hard Lower
 
