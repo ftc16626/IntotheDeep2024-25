@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Autonomous(name="Red Right With Arm", group="Shame")
+@Autonomous(name="The Better Red Right With Arm", group="Shame")
 
 public class RedRightWithArmDirectorscut extends LinearOpMode {
 
@@ -106,8 +106,9 @@ public class RedRightWithArmDirectorscut extends LinearOpMode {
         encoderDrive(.1, .1, 0, 0, -17, -2.25,-1,1,5.0);
         encoderDrive(.1, .1,  -5, -5,-90,-9,-1,1,  5.0);
         encoderDrive(TURN_SPEED, ROT_SPEED, -25, 25,0,0,0,0, 5.0);
-        //encoderDrive(DRIVE_SPEED, ROT_SPEED, 50, 50,0,0,0,0, 5.0);
-
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 50, 50,0,0,0,0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 25, -25,0,0,0,0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0,190,0,0,0, 5.0);
         telemetry.addData("Path", "Complete");
 
         telemetry.update();
