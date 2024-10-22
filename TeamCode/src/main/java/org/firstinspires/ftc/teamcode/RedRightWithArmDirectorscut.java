@@ -9,9 +9,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Autonomous(name="Red Left With Arm", group="Shame")
+@Autonomous(name="The Better Red Right With Arm", group="Shame")
 
-public class RedLeftWithArm extends LinearOpMode {
+public class RedRightWithArmDirectorscut extends LinearOpMode {
 
     /* Declare OpMode members. */
     private DcMotor         LFMotor   = null;
@@ -100,26 +100,15 @@ public class RedLeftWithArm extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  23,  23, 0, 0, 0,0, 5.0); // Forward
-
-        encoderDrive(TURN_SPEED, ROT_SPEED,  25, -25,0,0,0,0, 5.0); // Turn right
-
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 28, 28, 0,0,0,0,5.0); // Forward
-
-        encoderDrive(TURN_SPEED, ROT_SPEED, -25, 25,0,0,0,0, 5.0); // Turn left
-
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 5.5, 5.5, 185, 0,0,0,5.0); // Rotate Arm
-
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 11.25,0,0,5.0); // Extend Arm
-
-        encoderDrive(.1, .1, 0, 0, -32, -3.75,-1,1,5.0); // Small Lower
-
-        encoderDrive(.1, .1,  -20, -20,-90,-10,-1,1,  5.0); // Hard Lower
-
-        encoderDrive(TURN_SPEED, ROT_SPEED, 25, -25,0,0,0,0, 5.0); // Turn right
-
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 50, 50,0,0,0,0, 5.0); // Forward
-
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  21,  21, 0, 0, 0,0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 190, 0,0,0,5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 12.25,0,0,5.0);
+        encoderDrive(.1, .1, 0, 0, -17, -2.25,-1,1,5.0);
+        encoderDrive(.1, .1,  -5, -5,-90,-9,-1,1,  5.0);
+        encoderDrive(TURN_SPEED, ROT_SPEED, -25, 25,0,0,0,0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 50, 50,0,0,0,0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 25, -25,0,0,0,0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0,190,0,0,0, 5.0);
         telemetry.addData("Path", "Complete");
 
         telemetry.update();
@@ -154,9 +143,7 @@ public class RedLeftWithArm extends LinearOpMode {
             LBMotor.setTargetPosition(newLBTarget);
             RBMotor.setTargetPosition(newRBTarget);
             rotateArm.setTargetPosition(newROTarget);
-            rotateArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             extendArm.setTargetPosition(newEXTarget);
-            extendArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             // Turn On RUN_TO_POSITION
             LFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);

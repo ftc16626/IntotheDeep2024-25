@@ -110,6 +110,7 @@ public class MechanumDrive extends LinearOpMode {
         rotateArm.setDirection(DcMotor.Direction.FORWARD);
         extendArm.setDirection(DcMotor.Direction.FORWARD);
 
+
         // Wait for the game to start (driver presses PLAY)
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -132,6 +133,7 @@ public class MechanumDrive extends LinearOpMode {
             double rightFrontPower = axial - lateral - yaw;
             double leftBackPower   = axial - lateral + yaw;
             double rightBackPower  = -1 * (axial + lateral - yaw);
+            int ticksPerRot = gamepad1.left_stick_y *
 
             // Normalize the values so no wheel power exceeds 100%
             // This ensures that the robot maintains the desired motion.
@@ -148,7 +150,7 @@ public class MechanumDrive extends LinearOpMode {
 
  // Wheel 1 is left servo motor (facing front of motor)
 
-            if (gamepad2.dpad_down) {
+            if (gamepad2.left_bumper) {
                 Wheel1.setPower(-1);
                 Wheel2.setPower(0.9);
             }  else {
@@ -156,21 +158,21 @@ public class MechanumDrive extends LinearOpMode {
                 Wheel2.setPower(0);
             }
 
-            if (gamepad2.dpad_up) {
+            if (gamepad2.right_bumper) {
                 Wheel1.setPower(1);
                 Wheel2.setPower(-0.9);
             }  else {
                 Wheel1.setPower(0);
                 Wheel2.setPower(0);
             }
-
             // Send calculated power to wheels
             LFMotor.setPower(leftFrontPower);
             RFMotor.setPower(rightFrontPower);
             LBMotor.setPower(leftBackPower);
             RBMotor.setPower(rightBackPower);
-            rotateArm.setPower(gamepad2.left_stick_y);
+            rotateArm.setTargetPosition();
             extendArm.setPower(gamepad2.right_stick_y);
+
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
