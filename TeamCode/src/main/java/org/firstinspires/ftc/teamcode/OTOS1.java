@@ -79,7 +79,9 @@ public class OTOS1 extends LinearOpMode {
                 //myOtos.setAngularUnit(AngleUnit.DEGREES);
                 //myOtos.getPosition();
                 SparkFunOTOS.Pose2D pos = myOtos.getPosition();
-
+                while (pos.x < 50) {
+                    moveRobot(1,0,0);
+                }
 
 
 
