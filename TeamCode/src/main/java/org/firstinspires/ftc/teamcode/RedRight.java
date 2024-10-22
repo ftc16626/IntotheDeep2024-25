@@ -127,9 +127,9 @@ public class RedRight extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  25,  25, 5.0);
+        encoderDrive(DRIVE_SPEED,  3,  3, 5.0);
         sleep(250);
-        encoderDrive(DRIVE_SPEED,   -20, -20, 5.0);
+
         sleep(250);
         encoderDrive(TURN_SPEED, 25, -25, 5.0);
         sleep(250);

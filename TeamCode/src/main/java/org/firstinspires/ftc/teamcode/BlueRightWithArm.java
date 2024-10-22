@@ -100,11 +100,12 @@ public class BlueRightWithArm extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  21,  21, 0, 0, 0,0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  25,  25, 0, 0, 0,0, 5.0);
         encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 190, 0,0,0,5.0);
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 12.25,0,0,5.0);
-        encoderDrive(.1, .1, 0, 0, -17, -2.25,-1,1,5.0);
-        encoderDrive(.1, .1,  -20, -20,-90,-9,-1,1,  5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 10,0,0,5.0);
+        encoderDrive(.1, .1, 0, 0, -27, -3.75,-1,1,5.0);
+        encoderDrive(.1, .1,  -20, -20,-90,-7,-1,1,  5.0);
+        sleep(4000);
         encoderDrive(TURN_SPEED, ROT_SPEED, 25, -25,0,0,0,0, 5.0);
         encoderDrive(DRIVE_SPEED, ROT_SPEED, 50, 50,0,0,0,0, 5.0);
 
