@@ -41,8 +41,8 @@ public class RedRightWithArmDirectorscut extends LinearOpMode {
                                                       (PULLEY_DIAMETER_INCHES * 3.1415);
     static final double     ROTATE_GEAR_REDUC = 3.0 ;
     static final double     COUNTS_PER_DEGREE       = (COUNTS_PER_MOTOR_REV * ROTATE_GEAR_REDUC) / 360;
-    static final double     DRIVE_SPEED             = 0.6;
-    static final double     TURN_SPEED              = 0.5;
+    static final double     DRIVE_SPEED             = 0.3;
+    static final double     TURN_SPEED              = 0.25;
     static final double     ROT_SPEED               = 0.5;
 
     @Override
