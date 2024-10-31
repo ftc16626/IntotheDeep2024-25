@@ -133,7 +133,7 @@ public class MechanumDrive extends LinearOpMode {
             double rightFrontPower = axial - lateral - yaw;
             double leftBackPower   = axial - lateral + yaw;
             double rightBackPower  = -1 * (axial + lateral - yaw);
-            int ticksPerRot = gamepad1.left_stick_y *
+            //int ticksPerRot = gamepad1.left_stick_y *
 
             // Normalize the values so no wheel power exceeds 100%
             // This ensures that the robot maintains the desired motion.
@@ -170,7 +170,7 @@ public class MechanumDrive extends LinearOpMode {
             RFMotor.setPower(rightFrontPower);
             LBMotor.setPower(leftBackPower);
             RBMotor.setPower(rightBackPower);
-            rotateArm.setTargetPosition();
+            //rotateArm.setTargetPosition();
             extendArm.setPower(gamepad2.right_stick_y);
 
 
