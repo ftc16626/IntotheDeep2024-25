@@ -9,9 +9,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Autonomous(name="Red Left With Arm", group="Shame")
+@Autonomous(name="Blue Left With Arm", group="Shame")
 
-public class RedLeftWithArm extends LinearOpMode {
+public class BlueLeftWithArm extends LinearOpMode {
 
     /* Declare OpMode members. */
     private DcMotor         LFMotor   = null;

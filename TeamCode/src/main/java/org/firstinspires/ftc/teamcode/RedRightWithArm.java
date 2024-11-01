@@ -109,7 +109,7 @@ public class RedRightWithArm extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 280, 0,0,0,5.0);
         encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 17.25,0,0,5.0);
         encoderDrive(.1, .1, 0, 0, -19, -3.75,-1,1,5.0);
-        encoderDrive(.1, .1,  -18, -18,-90,-9,-1,1,  5.0);
+        encoderDrive(.1, .1,  -18, -18,-90,-10,-1,1,  5.0);
         encoderDrive(TURN_SPEED, ROT_SPEED, 26, -26,0,0,0,0, 5.0);
         encoderDrive(DRIVE_SPEED, ROT_SPEED, 51, 51,0,0,0,0, 5.0);
 
