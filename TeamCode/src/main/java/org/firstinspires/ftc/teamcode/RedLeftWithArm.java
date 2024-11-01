@@ -109,9 +109,9 @@ public class RedLeftWithArm extends LinearOpMode {
         encoderDrive(TURN_SPEED, ROT_SPEED,  26, -26,0,0,0,0, 5.0); // Turn right
         encoderDrive(DRIVE_SPEED, ROT_SPEED, 27, 27, 0,0,0,0,5.0); // Forward
         encoderDrive(TURN_SPEED, ROT_SPEED, -26, 26,0,0,0,0, 5.0); // Turn left
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 4.5, 4.5, 260, 0,0,0,7.0); // Rotate Arm
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 4.5, 4.5, 285, 0,0,0,7.0); // Rotate Arm
         encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 14.5,0,0,5.0); // Extend Arm
-        encoderDrive(.1, .1, 0, 0, -30, -3.75,-1,1,5.0); // Small Lower
+        encoderDrive(.1, .1, 0, 0, -40, -3.75,-1,1,5.0); // Small Lower
         encoderDrive(.1, .1,  -23, -23,-90,-10,-1,1,  5.0); // Hard Lower
         encoderDrive(TURN_SPEED, ROT_SPEED, 27, -27,0,0,0,0, 5.0); // Turn right
         encoderDrive(DRIVE_SPEED, ROT_SPEED, 47, 47,0,0,0,0, 5.0); // Forward
@@ -196,7 +196,7 @@ public class RedLeftWithArm extends LinearOpMode {
             RFMotor.setPower(0);
             LBMotor.setPower(0);
             RBMotor.setPower(0);
-            rotateArm.setPower(.1);
+            rotateArm.setPower(.05);
             extendArm.setPower(0);
             Wheel1.setPower(0);
             Wheel2.setPower(0);

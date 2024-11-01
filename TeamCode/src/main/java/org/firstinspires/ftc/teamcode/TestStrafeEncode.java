@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Autonomous(name="TestStrafe", group="Shame")
+@Autonomous(name="ZOOM", group="Shame")
 
 public class TestStrafeEncode extends LinearOpMode {
 
