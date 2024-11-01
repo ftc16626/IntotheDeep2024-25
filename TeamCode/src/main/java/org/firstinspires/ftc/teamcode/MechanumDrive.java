@@ -74,6 +74,7 @@ public class MechanumDrive extends LinearOpMode {
     private DcMotor RBMotor = null;
     private DcMotor rotateArm = null;
     private DcMotor extendArm = null;
+    private DcMotor liftArm = null;
     CRServo Wheel1;
     CRServo Wheel2;
 
@@ -88,6 +89,7 @@ public class MechanumDrive extends LinearOpMode {
         RBMotor = hardwareMap.get(DcMotor.class, "RBMotor");
         rotateArm = hardwareMap.get(DcMotor.class, "rotateArm");
         extendArm = hardwareMap.get(DcMotor.class, "extendArm");
+        liftArm = hardwareMap.get(DcMotor.class, "liftArm");
         Wheel1 = hardwareMap.get(CRServo.class, "Wheel1");
         Wheel1.resetDeviceConfigurationForOpMode();
         Wheel2 = hardwareMap.get(CRServo.class, "Wheel2");
@@ -103,12 +105,13 @@ public class MechanumDrive extends LinearOpMode {
         // when you first test your robot, push the left joystick forward and observe the direction the wheels turn.
         // Reverse the direction (flip FORWARD <-> REVERSE ) of any wheel that runs backward
         // Keep testing until ALL the wheels move the robot forward when you push the left joystick forward.
-        LFMotor.setDirection(DcMotor.Direction.FORWARD);
-        LBMotor.setDirection(DcMotor.Direction.FORWARD);
-        RFMotor.setDirection(DcMotor.Direction.REVERSE);
+        LFMotor.setDirection(DcMotor.Direction.REVERSE);
+        LBMotor.setDirection(DcMotor.Direction.REVERSE);
+        RFMotor.setDirection(DcMotor.Direction.FORWARD);
         RBMotor.setDirection(DcMotor.Direction.FORWARD);
         rotateArm.setDirection(DcMotor.Direction.FORWARD);
         extendArm.setDirection(DcMotor.Direction.FORWARD);
+        liftArm.setDirection(DcMotor.Direction.FORWARD);
 
 
         // Wait for the game to start (driver presses PLAY)
@@ -123,16 +126,16 @@ public class MechanumDrive extends LinearOpMode {
             double max;
 
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-            double axial   = gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-            double lateral =  -gamepad1.left_stick_x;
-            double yaw     =  -gamepad1.right_stick_x;
+            double axial   =  -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
+            double lateral =  gamepad1.left_stick_x;
+            double yaw     =  gamepad1.right_stick_x;
 
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
-            double leftFrontPower  = axial + lateral + yaw;
+            double leftFrontPower  = axial - lateral + yaw;
             double rightFrontPower = axial - lateral - yaw;
-            double leftBackPower   = axial - lateral + yaw;
-            double rightBackPower  = -1 * (axial + lateral - yaw);
+            double leftBackPower   = axial + lateral + yaw;
+            double rightBackPower  = axial + lateral - yaw;
             double armextPower  = gamepad2.right_stick_y;
             double armrotPower  = gamepad2.left_stick_y;
 
@@ -166,6 +169,13 @@ public class MechanumDrive extends LinearOpMode {
                 Wheel1.setPower(0);
                 Wheel2.setPower(0);
             }
+            if (gamepad2.a) {
+                liftArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                liftArm.setPower(1);
+            }
+            else {
+                liftArm.setPower(0);
+            }
             // Send calculated power to wheels
             LFMotor.setPower(leftFrontPower);
             RFMotor.setPower(rightFrontPower);
@@ -177,7 +187,8 @@ public class MechanumDrive extends LinearOpMode {
 
             }
             else {
-                rotateArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); // method not available in previous releases
+                rotateArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                rotateArm.setPower(armrotPower); // method not available in previous releases
             }
 
 

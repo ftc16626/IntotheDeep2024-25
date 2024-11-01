@@ -31,7 +31,7 @@ public class RedRightWithArm extends LinearOpMode {
     // For example, use a value of 2.0 for a 12-tooth spur gear driving a 24-tooth spur gear.
     // This is gearing DOWN for less speed and more torque.
     // For gearing UP, use a gear ratio less than 1.0. Note this will affect the direction of wheel rotation.
-    static final double     COUNTS_PER_MOTOR_REV   = 537.7;
+    static final double     COUNTS_PER_MOTOR_REV   = 384.5;
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // No External Gearing.
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;
     static final double     PULLEY_DIAMETER_INCHES = 1.5 ;// For figuring circumference
@@ -41,8 +41,8 @@ public class RedRightWithArm extends LinearOpMode {
                                                       (PULLEY_DIAMETER_INCHES * 3.1415);
     static final double     ROTATE_GEAR_REDUC = 3.0 ;
     static final double     COUNTS_PER_DEGREE       = (COUNTS_PER_MOTOR_REV * ROTATE_GEAR_REDUC) / 360;
-    static final double     DRIVE_SPEED             = 0.6;
-    static final double     TURN_SPEED              = 0.5;
+    static final double     DRIVE_SPEED             = 0.4;
+    static final double     TURN_SPEED              = 0.3;
     static final double     ROT_SPEED               = 0.5;
 
     @Override
@@ -97,16 +97,21 @@ public class RedRightWithArm extends LinearOpMode {
 
         // Wait for the game to start (driver presses START)
         waitForStart();
-
+        rotateArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        extendArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        RBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        RFMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LFMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  23,  23, 0, 0, 0,0, 5.0);
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 190, 0,0,0,5.0);
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 12.25,0,0,5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  24,  24, 0, 0, 0,0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 280, 0,0,0,5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 17.25,0,0,5.0);
         encoderDrive(.1, .1, 0, 0, -19, -3.75,-1,1,5.0);
-        encoderDrive(.1, .1,  -20, -20,-90,-9,-1,1,  5.0);
-        encoderDrive(TURN_SPEED, ROT_SPEED, 25, -25,0,0,0,0, 5.0);
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 50, 50,0,0,0,0, 5.0);
+        encoderDrive(.1, .1,  -18, -18,-90,-9,-1,1,  5.0);
+        encoderDrive(TURN_SPEED, ROT_SPEED, 26, -26,0,0,0,0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 51, 51,0,0,0,0, 5.0);
 
         telemetry.addData("Path", "Complete");
 
@@ -172,7 +177,7 @@ public class RedRightWithArm extends LinearOpMode {
             //onto the next step, use (isBusy() || isBusy()) in the loop test.
             while (opModeIsActive() &&
                    (runtime.seconds() < timeoutS) &&
-                   (LFMotor.isBusy() || rotateArm.isBusy() || extendArm.isBusy())) {
+                   (LFMotor.isBusy() || rotateArm.isBusy() || extendArm.isBusy() || RFMotor.isBusy() || LBMotor.isBusy() || RBMotor.isBusy() )) {
 
                 // Display it for the driver.
                 telemetry.addData("Running to",  " %7d :%7d", newLFTarget, newRFTarget,  newRBTarget,  newLBTarget);
@@ -186,7 +191,7 @@ public class RedRightWithArm extends LinearOpMode {
             RFMotor.setPower(0);
             LBMotor.setPower(0);
             RBMotor.setPower(0);
-            rotateArm.setPower(.1);
+            rotateArm.setPower(.05);
             extendArm.setPower(0);
             Wheel1.setPower(0);
             Wheel2.setPower(0);

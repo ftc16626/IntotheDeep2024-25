@@ -63,7 +63,7 @@ public class RedRightWithArmDirectorscut extends LinearOpMode {
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-        LFMotor.setDirection(DcMotor.Direction.REVERSE);
+        LFMotor.setDirection(DcMotor.Direction.FORWARD);
         LBMotor.setDirection(DcMotor.Direction.REVERSE);
         RFMotor.setDirection(DcMotor.Direction.FORWARD);
         RBMotor.setDirection(DcMotor.Direction.FORWARD);
