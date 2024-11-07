@@ -8,6 +8,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
@@ -22,16 +23,29 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  *
  * See the sensor's product page: https://www.sparkfun.com/products/24904
  */
-@Autonomous(name = "OTOSTEST2", group = "Config1")
-//@Disabled
+@Autonomous(name = "OTOSTEST2", group = "LASER")
 public class SensorSparkFunOTOS1 extends LinearOpMode {
     // Create an instance of the sensor
     SparkFunOTOS myOtos;
+    private DcMotor LFMotor;
+    private DcMotor RFMotor;
+    private DcMotor LBMotor;
+    private DcMotor RBMotor;
 
-    @Override
-    public void runOpMode() throws InterruptedException {
+
+    public void runOpMode() {
         // Get a reference to the sensor
         myOtos = hardwareMap.get(SparkFunOTOS.class, "SparkFun");
+
+        RBMotor = hardwareMap.get(DcMotor.class, "RBMotor");
+        RFMotor = hardwareMap.get(DcMotor.class, "RFMotor");
+        LBMotor = hardwareMap.get(DcMotor.class, "LBMotor");
+        LFMotor = hardwareMap.get(DcMotor.class, "LFMotor");
+
+        LFMotor.setDirection(DcMotor.Direction.REVERSE);
+        LBMotor.setDirection(DcMotor.Direction.REVERSE);
+        RFMotor.setDirection(DcMotor.Direction.FORWARD);
+        RBMotor.setDirection(DcMotor.Direction.FORWARD);
 
         // All the configuration for the OTOS is done in this helper method, check it out!
         configureOtos();
@@ -44,21 +58,26 @@ public class SensorSparkFunOTOS1 extends LinearOpMode {
             // Get the latest position, which includes the x and y coordinates, plus the
             // heading angle
             SparkFunOTOS.Pose2D pos = myOtos.getPosition();
-
-            // Reset the tracking if the user requests it
-            if (gamepad1.y) {
-                myOtos.resetTracking();
+            while (pos.y < 61){
+                LFMotor.setPower(0.5);
+                RFMotor.setPower(0.5);
+                LBMotor.setPower(0.5);
+                RBMotor.setPower(0.5);
+                myOtos.getPosition();
+                if (pos.y >= 61) {
+                    LFMotor.setPower(0);
+                    RFMotor.setPower(0);
+                    LBMotor.setPower(0);
+                    RBMotor.setPower(0);
+                }
             }
+            // Reset the tracking if the user requests it
 
             // Re-calibrate the IMU if the user requests it
-            if (gamepad1.x) {
-                myOtos.calibrateImu();
-            }
+
 
             // Inform user of available controls
-            telemetry.addLine("Press Y (triangle) on Gamepad to reset tracking");
-            telemetry.addLine("Press X (square) on Gamepad to calibrate the IMU");
-            telemetry.addLine();
+
 
             // Log the position to the telemetry
             telemetry.addData("X coordinate", pos.x);

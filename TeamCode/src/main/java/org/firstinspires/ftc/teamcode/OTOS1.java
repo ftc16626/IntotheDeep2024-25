@@ -48,10 +48,10 @@ public class OTOS1 extends LinearOpMode {
         // when you first test your robot, push the left joystick forward and observe the direction the wheels turn.
         // Reverse the direction (flip FORWARD <-> REVERSE ) of any wheel that runs backward
         // Keep testing until ALL the wheels move the robot forward when you push the left joystick forward.
-        leftFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        leftBackDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightFrontDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
+       // leftFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        //leftBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        //rightFrontDrive.setDirection(DcMotor.Direction.REVERSE);
+        //rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
 
         // Get a reference to the sensor
         myOtos = hardwareMap.get(SparkFunOTOS.class, "SparkFun");
@@ -79,11 +79,19 @@ public class OTOS1 extends LinearOpMode {
                 //myOtos.setAngularUnit(AngleUnit.DEGREES);
                 //myOtos.getPosition();
                 SparkFunOTOS.Pose2D pos = myOtos.getPosition();
-                while (pos.x < 50) {
-                    moveRobot(1,0,0);
+
+                if (pos.x > -61){
+                    leftFrontDrive.setPower(0.5);
+                    leftBackDrive.setPower(-0.5);
+                    rightFrontDrive.setPower(0.5);
+                    rightBackDrive.setPower(0.5);
+                    if (pos.x < -61) {
+                        leftFrontDrive.setPower(0);
+                        leftBackDrive.setPower(0);
+                        rightFrontDrive.setPower(0);
+                        rightBackDrive.setPower(0);
+                    }
                 }
-
-
 
                 // Show the elapsed game time.
                 telemetry.addData("Status", "Run Time: " + runtime.toString());
@@ -140,7 +148,7 @@ public class OTOS1 extends LinearOpMode {
         // multiple speeds to get an average, then set the linear scalar to the
         // inverse of the error. For example, if you move the robot 100 inches and
         // the sensor reports 103 inches, set the linear scalar to 100/103 = 0.971
-        myOtos.setLinearScalar(1.008);
+        myOtos.setLinearScalar(1.0);
         myOtos.setAngularScalar(0.992);
 
         // The IMU on the OTOS includes a gyroscope and accelerometer, which could
@@ -208,10 +216,10 @@ public class OTOS1 extends LinearOpMode {
         }
 
         // Send powers to the wheels.
-        leftFrontDrive.setPower(leftFrontPower);
-        rightFrontDrive.setPower(rightFrontPower);
-        leftBackDrive.setPower(leftBackPower);
-        rightBackDrive.setPower(rightBackPower);
+        //leftFrontDrive.setPower(leftFrontPower);
+        //rightFrontDrive.setPower(rightFrontPower);
+        //leftBackDrive.setPower(leftBackPower);
+        //rightBackDrive.setPower(rightBackPower);
         sleep(10);
     }
 }
