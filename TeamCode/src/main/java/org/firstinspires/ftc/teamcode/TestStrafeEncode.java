@@ -43,7 +43,7 @@ public class TestStrafeEncode extends LinearOpMode {
     static final double     COUNTS_PER_DEGREE       = (COUNTS_PER_MOTOR_REV * ROTATE_GEAR_REDUC) / 360;
     static final double     DRIVE_SPEED             = 1;
     static final double     TURN_SPEED              = 0.5;
-    static final double     ROT_SPEED               = 1;
+    static final double     ROT_SPEED               = 0.7;
 
     @Override
     public void runOpMode() {
@@ -105,21 +105,25 @@ public class TestStrafeEncode extends LinearOpMode {
         LBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  24.5, 24.5, 24.5,  24.5,false, 0, 0, 0,0, 5.0);
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0,0,0,false, 60, 0,0,0,5.0);
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0,0,0, 0,false, 250, 16.25,0,0,5.0);
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0,0,0, 0,false, -50, -4,-1,1,5.0);
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -12,-12,-12, -12,false,-180,-5,-1,1,  5.0);
-        encoderDrive(TURN_SPEED, ROT_SPEED,  -46,-46,-46,-46,true, 0,0,1,-1,  5.0);
-        encoderDrive(.3, .3,  3,3,3, 3,false,-70,7,-1,1,  5.0);
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, -15,-15,-15, -15,false,0,0,0,0, 5.0);
-        encoderDrive(TURN_SPEED, ROT_SPEED, -39,-39,39, 39,false,0,0,0,0,  5.0);
-        encoderDrive(.1, .1,  0,0,0, 0,false,180,0,0,0,  5.0);
-        encoderDrive(.1, .1,  7,7,7, 7,false,0,21,0,0,  5.0);
-        encoderDrive(.1, .1,  0,0,0, 0,false,-10,2,1,-1,  3.0);
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -4,-4,-4,  -4,false, 0, 0, 0,0, 5.0);
-        encoderDrive(TURN_SPEED, ROT_SPEED,  -39,-39,39,  39,false, 0, 0, 0,0, 5.0);
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  100,100,100,  100,false, 0, 0, 0,0, 10.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  22.5, 22.5, 22.5,  22.5,false, 0, 0, 0,0, 5.0); //Forward
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0,0,0,false, 6, 0,0,0,5.0); // Small Rotate Up
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0,0,0, 0,false, 290, 0,0,0,5.0); // Rotate
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0,0,0, 0,false, 0, 18.0,0,0,5.0); // Extend
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0,0,0, 0,false, -50, -4,-1,1,5.0); // Aim Specimen
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -13,-13,-13, -13,false,-180,-5,-1,1,  5.0); // Back Up
+        encoderDrive(TURN_SPEED, ROT_SPEED,  -46,-46,-46,-46,true, 0,0,1,-1,  5.0); // Strafe Left
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  3.5,3.5,3.5, 3.5,false,-20,8,-1,1,  5.0); // Pick Up Sample
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, -15,-15,-15, -15,false,0,0,0,0, 5.0); // Back Up
+        encoderDrive(TURN_SPEED, ROT_SPEED, -39,-39,39, 39,false,0,0,0,0,  5.0); // Turn Left
+        encoderDrive(TURN_SPEED, ROT_SPEED,  4.5,4.5,4.5,4.5,true, 0,0,0,0,  5.0); //Strafe Right
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -4,-4,-4, -4,false,30,0,0,0,  5.0); // Back Up
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0,0,0, 0,false,30,0,0,0,  5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  6.5,6.5,6.5, 6.5,false,270,0,0,0,  5.0); // Rotate Up
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0,0,0, 0,false,0,10,0,0,  5.0); // Forward and Extend
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0,0,0, 0,false,0,2,1,-1,  3.0); // Sample Score
+        //encoderDrive(DRIVE_SPEED, ROT_SPEED,  -4,-4,-4,  -4,false, 0, 0, 0,0, 5.0); // Back Up
+        //encoderDrive(TURN_SPEED, ROT_SPEED,  -39,-39,39,  39,false, 0, 0, 0,0, 5.0); // Turn
+        //encoderDrive(DRIVE_SPEED, ROT_SPEED,  100,100,100,  100,false, 0, 0, 0,0, 10.0); // Park
 
         telemetry.addData("Path", "Complete");
 
