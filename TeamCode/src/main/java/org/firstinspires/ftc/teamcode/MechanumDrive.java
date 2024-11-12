@@ -109,7 +109,7 @@ public class MechanumDrive extends LinearOpMode {
         LBMotor.setDirection(DcMotor.Direction.REVERSE);
         RFMotor.setDirection(DcMotor.Direction.FORWARD);
         RBMotor.setDirection(DcMotor.Direction.FORWARD);
-        rotateArm.setDirection(DcMotor.Direction.FORWARD);
+        rotateArm.setDirection(DcMotor.Direction.REVERSE);
         extendArm.setDirection(DcMotor.Direction.FORWARD);
         liftArm.setDirection(DcMotor.Direction.FORWARD);
 
