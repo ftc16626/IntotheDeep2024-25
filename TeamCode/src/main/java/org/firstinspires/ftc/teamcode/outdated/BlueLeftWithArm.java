@@ -1,6 +1,6 @@
 
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.outdated;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -9,9 +9,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Autonomous(name="ZOOM", group="Shame")
+@Autonomous(name="Blue Left With Arm", group="Shame")
 
-public class TestStrafeEncode extends LinearOpMode {
+public class BlueLeftWithArm extends LinearOpMode {
 
     /* Declare OpMode members. */
     private DcMotor         LFMotor   = null;
@@ -31,21 +31,19 @@ public class TestStrafeEncode extends LinearOpMode {
     // For example, use a value of 2.0 for a 12-tooth spur gear driving a 24-tooth spur gear.
     // This is gearing DOWN for less speed and more torque.
     // For gearing UP, use a gear ratio less than 1.0. Note this will affect the direction of wheel rotation.
-    static final double     COUNTS_PER_DRIVE_MOTOR_REV   = 384.5;
-    static final double     COUNTS_PER_EXT_MOTOR_REV    = 537.7;
-    static final double     COUNTS_PER_ROT_MOTOR_REV    = 1993.6;
+    static final double     COUNTS_PER_MOTOR_REV   = 384.5;
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // No External Gearing.
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;
     static final double     PULLEY_DIAMETER_INCHES = 1.5 ;// For figuring circumference
-    static final double     COUNTS_PER_INCH         = (COUNTS_PER_DRIVE_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
                                                       (WHEEL_DIAMETER_INCHES * 3.1415);
-    static final double     COUNTS_PER_EXTINCH      = (COUNTS_PER_EXT_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+    static final double     COUNTS_PER_EXTINCH      = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
                                                       (PULLEY_DIAMETER_INCHES * 3.1415);
-    static final double     ROTATE_GEAR_REDUC = 2.0 ;
-    static final double     COUNTS_PER_DEGREE       = (COUNTS_PER_ROT_MOTOR_REV * ROTATE_GEAR_REDUC) / 360;
-    static final double     DRIVE_SPEED             = 1;
-    static final double     TURN_SPEED              = 0.5;
-    static final double     ROT_SPEED               = 0.7;
+    static final double     ROTATE_GEAR_REDUC = 3.0 ;
+    static final double     COUNTS_PER_DEGREE       = (COUNTS_PER_MOTOR_REV * ROTATE_GEAR_REDUC) / 360;
+    static final double     DRIVE_SPEED             = 0.4;
+    static final double     TURN_SPEED              = 0.3;
+    static final double     ROT_SPEED               = 0.5;
 
     @Override
     public void runOpMode() {
@@ -107,25 +105,16 @@ public class TestStrafeEncode extends LinearOpMode {
         LBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  22.5, 22.5, 22.5,  22.5,false, 0, 0, 0,0, 5.0); //Forward
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0,0,0,false, 6, 0,0,0,5.0); // Small Rotate Up
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0,0,0, 0,false, 290, 0,0,0,5.0); // Rotate
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0,0,0, 0,false, 0, 18.0,0,0,5.0); // Extend
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0,0,0, 0,false, -50, -4,-1,1,5.0); // Aim Specimen
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -13,-13,-13, -13,false,-180,-5,-1,1,  5.0); // Back Up
-        encoderDrive(TURN_SPEED, ROT_SPEED,  -46,-46,-46,-46,true, 0,0,1,-1,  5.0); // Strafe Left
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  3.5,3.5,3.5, 3.5,false,-20,8,-1,1,  5.0); // Pick Up Sample
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, -15,-15,-15, -15,false,0,0,0,0, 5.0); // Back Up
-        encoderDrive(TURN_SPEED, ROT_SPEED, -39,-39,39, 39,false,0,0,0,0,  5.0); // Turn Left
-        encoderDrive(TURN_SPEED, ROT_SPEED,  4.5,4.5,4.5,4.5,true, 0,0,0,0,  5.0); //Strafe Right
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -4,-4,-4, -4,false,30,0,0,0,  5.0); // Back Up
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0,0,0, 0,false,30,0,0,0,  5.0);
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  6.5,6.5,6.5, 6.5,false,270,0,0,0,  5.0); // Rotate Up
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0,0,0, 0,false,0,10,0,0,  5.0); // Forward and Extend
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0,0,0, 0,false,0,2,1,-1,  3.0); // Sample Score
-        //encoderDrive(DRIVE_SPEED, ROT_SPEED,  -4,-4,-4,  -4,false, 0, 0, 0,0, 5.0); // Back Up
-        //encoderDrive(TURN_SPEED, ROT_SPEED,  -39,-39,39,  39,false, 0, 0, 0,0, 5.0); // Turn
-        //encoderDrive(DRIVE_SPEED, ROT_SPEED,  100,100,100,  100,false, 0, 0, 0,0, 10.0); // Park
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  23,  23, 0, 0, 0,0, 5.0); // Forward
+        encoderDrive(TURN_SPEED, ROT_SPEED,  26, -26,0,0,0,0, 5.0); // Turn right
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 27, 27, 0,0,0,0,5.0); // Forward
+        encoderDrive(TURN_SPEED, ROT_SPEED, -26, 26,0,0,0,0, 5.0); // Turn left
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 4.5, 4.5, 285, 0,0,0,7.0); // Rotate Arm
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 14.5,0,0,5.0); // Extend Arm
+        encoderDrive(.1, .1, 0, 0, -40, -3.75,-1,1,5.0); // Small Lower
+        encoderDrive(.1, .1,  -23, -23,-90,-10,-1,1,  5.0); // Hard Lower
+        encoderDrive(TURN_SPEED, ROT_SPEED, 27, -27,0,0,0,0, 5.0); // Turn right
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 47, 47,0,0,0,0, 5.0); // Forward
 
         telemetry.addData("Path", "Complete");
 
@@ -135,9 +124,7 @@ public class TestStrafeEncode extends LinearOpMode {
 
 
     public void encoderDrive(double speed, double armspeed,
-                             double leftFInches, double leftBInches,
-                             double rightFInches, double rightBInches,
-                             boolean Strafe,
+                             double leftInches, double rightInches,
                              double RotDegrees, double ExtInches, double wheel1Power, double wheel2Power,
                              double timeoutS) {
         int newLFTarget;
@@ -149,23 +136,12 @@ public class TestStrafeEncode extends LinearOpMode {
 
         // Ensure that the OpMode is still active
         if (opModeIsActive()) {
-            if (Strafe) {
-                LFMotor.setDirection(DcMotor.Direction.FORWARD);
-                RFMotor.setDirection(DcMotor.Direction.REVERSE);
-            }
-            else {
-                LFMotor.setDirection(DcMotor.Direction.REVERSE);
-                RFMotor.setDirection(DcMotor.Direction.FORWARD);
-            }
-
-
-
 
             // Determine new target position, and pass to motor controller
-            newLFTarget = LFMotor.getCurrentPosition() + (int)(leftFInches * COUNTS_PER_INCH);
-            newLBTarget = LBMotor.getCurrentPosition() + (int)(leftBInches * COUNTS_PER_INCH);
-            newRFTarget = RFMotor.getCurrentPosition() + (int)(rightFInches * COUNTS_PER_INCH);
-            newRBTarget = RBMotor.getCurrentPosition() + (int)(rightBInches * COUNTS_PER_INCH);
+            newLFTarget = LFMotor.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+            newLBTarget = LBMotor.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+            newRFTarget = RFMotor.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            newRBTarget = RBMotor.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
             newROTarget = rotateArm.getCurrentPosition() + (int)(RotDegrees * COUNTS_PER_DEGREE);
             newEXTarget = extendArm.getCurrentPosition() + (int)(ExtInches * COUNTS_PER_EXTINCH);
 
@@ -174,7 +150,9 @@ public class TestStrafeEncode extends LinearOpMode {
             LBMotor.setTargetPosition(newLBTarget);
             RBMotor.setTargetPosition(newRBTarget);
             rotateArm.setTargetPosition(newROTarget);
+            rotateArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             extendArm.setTargetPosition(newEXTarget);
+            extendArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             // Turn On RUN_TO_POSITION
             LFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -204,7 +182,7 @@ public class TestStrafeEncode extends LinearOpMode {
             //onto the next step, use (isBusy() || isBusy()) in the loop test.
             while (opModeIsActive() &&
                    (runtime.seconds() < timeoutS) &&
-                   (LFMotor.isBusy() || rotateArm.isBusy() || extendArm.isBusy() || RFMotor.isBusy() || LBMotor.isBusy() || RBMotor.isBusy() )) {
+                   (LFMotor.isBusy() || rotateArm.isBusy() || extendArm.isBusy())) {
 
                 // Display it for the driver.
                 telemetry.addData("Running to",  " %7d :%7d", newLFTarget, newRFTarget,  newRBTarget,  newLBTarget);
@@ -230,7 +208,8 @@ public class TestStrafeEncode extends LinearOpMode {
             RBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             rotateArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             extendArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            
+
+            sleep(500);   // optional pause after each move.
         }
     }
 }

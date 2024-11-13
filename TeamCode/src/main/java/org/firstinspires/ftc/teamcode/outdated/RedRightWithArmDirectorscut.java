@@ -1,74 +1,27 @@
-/* Copyright (c) 2017 FIRST. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted (subject to the limitations in the disclaimer below) provided that
- * the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice, this list
- * of conditions and the following disclaimer.
- *
- * Redistributions in binary form must reproduce the above copyright notice, this
- * list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution.
- *
- * Neither the name of FIRST nor the names of its contributors may be used to endorse or
- * promote products derived from this software without specific prior written permission.
- *
- * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
- * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
 
-package org.firstinspires.ftc.teamcode;
+
+package org.firstinspires.ftc.teamcode.outdated;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-/*
- * This OpMode illustrates the concept of driving a path based on encoder counts.
- * The code is structured as a LinearOpMode
- *
- * The code REQUIRES that you DO have encoders on the wheels,
- *   otherwise you would use: RobotAutoDriveByTime;
- *
- *  This code ALSO requires that the drive Motors have been configured such that a positive
- *  power command moves them forward, and causes the encoders to count UP.
- *
- *   The desired path in this example is:
- *   - Drive forward for 48 inches
- *   - Spin right for 12 Inches
- *   - Drive Backward for 24 inches
- *   - Stop and close the claw.
- *
- *  The code is written using a method called: encoderDrive(speed, leftInches, rightInches, timeoutS)
- *  that performs the actual movement.
- *  This method assumes that each movement is relative to the last stopping place.
- *  There are other ways to perform encoder based moves, but this method is probably the simplest.
- *  This code uses the RUN_TO_POSITION mode to enable the Motor controllers to generate the run profile
- *
- * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
- * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
- */
 
-@Autonomous(name="Red Right", group="Shame")
+@Autonomous(name="The Better Red Right With Arm", group="Shame")
 
-public class RedRight extends LinearOpMode {
+public class RedRightWithArmDirectorscut extends LinearOpMode {
 
     /* Declare OpMode members. */
     private DcMotor         LFMotor   = null;
     private DcMotor         RFMotor  = null;
     private DcMotor         LBMotor   = null;
     private DcMotor         RBMotor  = null;
+    private DcMotor         rotateArm = null;
+    private DcMotor         extendArm = null;
+    CRServo Wheel1;
+    CRServo Wheel2;
 
     private ElapsedTime     runtime = new ElapsedTime();
 
@@ -80,11 +33,17 @@ public class RedRight extends LinearOpMode {
     // For gearing UP, use a gear ratio less than 1.0. Note this will affect the direction of wheel rotation.
     static final double     COUNTS_PER_MOTOR_REV   = 537.7;
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // No External Gearing.
-    static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
+    static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;
+    static final double     PULLEY_DIAMETER_INCHES = 1.5 ;// For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
                                                       (WHEEL_DIAMETER_INCHES * 3.1415);
+    static final double     COUNTS_PER_EXTINCH      = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+                                                      (PULLEY_DIAMETER_INCHES * 3.1415);
+    static final double     ROTATE_GEAR_REDUC = 3.0 ;
+    static final double     COUNTS_PER_DEGREE       = (COUNTS_PER_MOTOR_REV * ROTATE_GEAR_REDUC) / 360;
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
+    static final double     ROT_SPEED               = 0.5;
 
     @Override
     public void runOpMode() {
@@ -94,32 +53,46 @@ public class RedRight extends LinearOpMode {
         RFMotor = hardwareMap.get(DcMotor.class, "RFMotor");
         LBMotor = hardwareMap.get(DcMotor.class, "LBMotor");
         LFMotor = hardwareMap.get(DcMotor.class, "LFMotor");
+        rotateArm = hardwareMap.get(DcMotor.class, "rotateArm");
+        extendArm = hardwareMap.get(DcMotor.class, "extendArm");
+        Wheel1 = hardwareMap.get(CRServo.class, "Wheel1");
+        Wheel1.resetDeviceConfigurationForOpMode();
+        Wheel2 = hardwareMap.get(CRServo.class, "Wheel2");
+        Wheel2.resetDeviceConfigurationForOpMode();
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-        LFMotor.setDirection(DcMotor.Direction.REVERSE);
+        LFMotor.setDirection(DcMotor.Direction.FORWARD);
         LBMotor.setDirection(DcMotor.Direction.REVERSE);
         RFMotor.setDirection(DcMotor.Direction.FORWARD);
         RBMotor.setDirection(DcMotor.Direction.FORWARD);
+        rotateArm.setDirection(DcMotor.Direction.REVERSE);
+        extendArm.setDirection(DcMotor.Direction.REVERSE);
 
         LFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         LBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
+        rotateArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        extendArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         LFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         LBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rotateArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        extendArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
         // Send telemetry message to indicate successful Encoder reset
         telemetry.addData("Starting at",  "%7d :%7d",
                           LFMotor.getCurrentPosition(),
                           LBMotor.getCurrentPosition(),
                           RFMotor.getCurrentPosition(),
-                          RBMotor.getCurrentPosition());
+                          RBMotor.getCurrentPosition(),
+                          rotateArm.getCurrentPosition(),
+                          extendArm.getCurrentPosition());
         telemetry.update();
 
         // Wait for the game to start (driver presses START)
@@ -127,35 +100,32 @@ public class RedRight extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  3,  3, 5.0);
-        sleep(250);
-
-        sleep(250);
-        encoderDrive(TURN_SPEED, 25, -25, 5.0);
-        sleep(250);
-        encoderDrive(DRIVE_SPEED, 50, 50, 5.0);
-        sleep(250);
-
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  21,  21, 0, 0, 0,0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 190, 0,0,0,5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 12.25,0,0,5.0);
+        encoderDrive(.1, .1, 0, 0, -17, -2.25,-1,1,5.0);
+        encoderDrive(.1, .1,  -5, -5,-90,-9,-1,1,  5.0);
+        encoderDrive(TURN_SPEED, ROT_SPEED, -25, 25,0,0,0,0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 50, 50,0,0,0,0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 25, -25,0,0,0,0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0,190,0,0,0, 5.0);
         telemetry.addData("Path", "Complete");
+
         telemetry.update();
         sleep(1000);  // pause to display final telemetry message.
     }
 
-    /*
-     *  Method to perform a relative move, based on encoder counts.
-     *  Encoders are not reset as the move is based on the current position.
-     *  Move will stop if any of three conditions occur:
-     *  1) Move gets to the desired position
-     *  2) Move runs out of time
-     *  3) Driver stops the OpMode running.
-     */
-    public void encoderDrive(double speed,
+
+    public void encoderDrive(double speed, double armspeed,
                              double leftInches, double rightInches,
+                             double RotDegrees, double ExtInches, double wheel1Power, double wheel2Power,
                              double timeoutS) {
         int newLFTarget;
         int newLBTarget;
         int newRFTarget;
         int newRBTarget;
+        int newROTarget;
+        int newEXTarget;
 
         // Ensure that the OpMode is still active
         if (opModeIsActive()) {
@@ -165,22 +135,35 @@ public class RedRight extends LinearOpMode {
             newLBTarget = LBMotor.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
             newRFTarget = RFMotor.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
             newRBTarget = RBMotor.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            newROTarget = rotateArm.getCurrentPosition() + (int)(RotDegrees * COUNTS_PER_DEGREE);
+            newEXTarget = extendArm.getCurrentPosition() + (int)(ExtInches * COUNTS_PER_EXTINCH);
+
             LFMotor.setTargetPosition(newLFTarget);
             RFMotor.setTargetPosition(newRFTarget);
             LBMotor.setTargetPosition(newLBTarget);
             RBMotor.setTargetPosition(newRBTarget);
+            rotateArm.setTargetPosition(newROTarget);
+            extendArm.setTargetPosition(newEXTarget);
 
             // Turn On RUN_TO_POSITION
             LFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             RFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             RBMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             LBMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rotateArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            extendArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             // reset the timeout time and start motion.
             runtime.reset();
             LFMotor.setPower(Math.abs(speed));
             RFMotor.setPower(Math.abs(speed));
             LBMotor.setPower(Math.abs(speed));
             RBMotor.setPower(Math.abs(speed));
+            rotateArm.setPower(Math.abs(armspeed));
+            extendArm.setPower(Math.abs(speed));
+            Wheel1.setPower(wheel1Power);
+            Wheel2.setPower(wheel2Power);
+
+
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
@@ -190,12 +173,12 @@ public class RedRight extends LinearOpMode {
             //onto the next step, use (isBusy() || isBusy()) in the loop test.
             while (opModeIsActive() &&
                    (runtime.seconds() < timeoutS) &&
-                   (LFMotor.isBusy() || RFMotor.isBusy())) {
+                   (LFMotor.isBusy() || rotateArm.isBusy() || extendArm.isBusy())) {
 
                 // Display it for the driver.
                 telemetry.addData("Running to",  " %7d :%7d", newLFTarget, newRFTarget,  newRBTarget,  newLBTarget);
                 telemetry.addData("Currently at",  " at %7d :%7d",
-                                            LFMotor.getCurrentPosition(), RFMotor.getCurrentPosition(), LBMotor.getCurrentPosition(), RBMotor.getCurrentPosition());
+                                            LFMotor.getCurrentPosition(), RFMotor.getCurrentPosition(), LBMotor.getCurrentPosition(), RBMotor.getCurrentPosition(), rotateArm.getCurrentPosition(), extendArm.getCurrentPosition());
                 telemetry.update();
             }
 
@@ -204,14 +187,20 @@ public class RedRight extends LinearOpMode {
             RFMotor.setPower(0);
             LBMotor.setPower(0);
             RBMotor.setPower(0);
+            rotateArm.setPower(.1);
+            extendArm.setPower(0);
+            Wheel1.setPower(0);
+            Wheel2.setPower(0);
 
             // Turn off RUN_TO_POSITION
             LFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             RFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             LBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             RBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            rotateArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            extendArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(250);   // optional pause after each move.
+            sleep(500);   // optional pause after each move.
         }
     }
 }

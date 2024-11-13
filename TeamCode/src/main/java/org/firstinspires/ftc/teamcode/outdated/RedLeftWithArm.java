@@ -1,18 +1,17 @@
 
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.outdated;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 
-@Autonomous(name="EncoderWithArmUse", group="Shame")
-@Disabled
-public class EncoderWithArmUse extends LinearOpMode {
+@Autonomous(name="Red Left With Arm", group="Shame")
+
+public class RedLeftWithArm extends LinearOpMode {
 
     /* Declare OpMode members. */
     private DcMotor         LFMotor   = null;
@@ -32,7 +31,7 @@ public class EncoderWithArmUse extends LinearOpMode {
     // For example, use a value of 2.0 for a 12-tooth spur gear driving a 24-tooth spur gear.
     // This is gearing DOWN for less speed and more torque.
     // For gearing UP, use a gear ratio less than 1.0. Note this will affect the direction of wheel rotation.
-    static final double     COUNTS_PER_MOTOR_REV   = 537.7;
+    static final double     COUNTS_PER_MOTOR_REV   = 384.5;
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // No External Gearing.
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;
     static final double     PULLEY_DIAMETER_INCHES = 1.5 ;// For figuring circumference
@@ -42,8 +41,8 @@ public class EncoderWithArmUse extends LinearOpMode {
                                                       (PULLEY_DIAMETER_INCHES * 3.1415);
     static final double     ROTATE_GEAR_REDUC = 3.0 ;
     static final double     COUNTS_PER_DEGREE       = (COUNTS_PER_MOTOR_REV * ROTATE_GEAR_REDUC) / 360;
-    static final double     DRIVE_SPEED             = 0.6;
-    static final double     TURN_SPEED              = 0.5;
+    static final double     DRIVE_SPEED             = 0.4;
+    static final double     TURN_SPEED              = 0.3;
     static final double     ROT_SPEED               = 0.5;
 
     @Override
@@ -98,16 +97,24 @@ public class EncoderWithArmUse extends LinearOpMode {
 
         // Wait for the game to start (driver presses START)
         waitForStart();
-
+        rotateArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        extendArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        RBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        RFMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LFMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  21,  21, 0, 0, 0,0, 5.0);
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 190, 0,0,0,5.0);
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 12.25,0,0,5.0);
-        encoderDrive(.1, .1, 0, 0, -17, -2.25,-1,1,5.0);
-        encoderDrive(.1, .1,  -20, -20,-90,-9,-1,1,  5.0);
-        encoderDrive(TURN_SPEED, ROT_SPEED, 25, -25,0,0,0,0, 5.0);
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 50, 50,0,0,0,0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  23,  23, 0, 0, 0,0, 5.0); // Forward
+        encoderDrive(TURN_SPEED, ROT_SPEED,  26, -26,0,0,0,0, 5.0); // Turn right
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 27, 27, 0,0,0,0,5.0); // Forward
+        encoderDrive(TURN_SPEED, ROT_SPEED, -26, 26,0,0,0,0, 5.0); // Turn left
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 4.25, 4.25, 290, 0,0,0,7.0); // Rotate Arm
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 14.5,0,0,5.0); // Extend Arm
+        encoderDrive(.1, .1, 0, 0, -45, -3.75,-1,1,5.0); // Small Lower
+        encoderDrive(.1, .1,  -23, -23,-90,-10,-1,1,  5.0); // Hard Lower
+        encoderDrive(TURN_SPEED, ROT_SPEED, 27, -27,0,0,0,0, 5.0); // Turn right
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 47, 47,0,0,0,0, 5.0); // Forward
 
         telemetry.addData("Path", "Complete");
 
@@ -143,7 +150,9 @@ public class EncoderWithArmUse extends LinearOpMode {
             LBMotor.setTargetPosition(newLBTarget);
             RBMotor.setTargetPosition(newRBTarget);
             rotateArm.setTargetPosition(newROTarget);
+            rotateArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             extendArm.setTargetPosition(newEXTarget);
+            extendArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
             // Turn On RUN_TO_POSITION
             LFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -187,7 +196,7 @@ public class EncoderWithArmUse extends LinearOpMode {
             RFMotor.setPower(0);
             LBMotor.setPower(0);
             RBMotor.setPower(0);
-            rotateArm.setPower(.1);
+            rotateArm.setPower(.05);
             extendArm.setPower(0);
             Wheel1.setPower(0);
             Wheel2.setPower(0);
