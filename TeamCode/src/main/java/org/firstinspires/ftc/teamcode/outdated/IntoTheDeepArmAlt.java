@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode.outdated;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 
 @TeleOp
-
+@Disabled
 public class IntoTheDeepArmAlt extends LinearOpMode {
     private DcMotor rotateArm;
     private DcMotor extendArm;
