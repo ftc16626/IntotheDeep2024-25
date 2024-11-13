@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.outdated;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 
 @TeleOp
+@Disabled
 public class TestClaw2 extends LinearOpMode{
     CRServo Wheel1;
     CRServo Wheel2;

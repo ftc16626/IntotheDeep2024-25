@@ -30,6 +30,7 @@
 package org.firstinspires.ftc.teamcode.outdated;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -61,7 +62,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @Autonomous(name="Red Right", group="Shame")
-
+@Disabled
 public class RedRight extends LinearOpMode {
 
     /* Declare OpMode members. */

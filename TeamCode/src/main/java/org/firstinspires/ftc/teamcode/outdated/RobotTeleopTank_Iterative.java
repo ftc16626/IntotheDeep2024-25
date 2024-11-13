@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode.outdated;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -49,9 +50,8 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @TeleOp(name="Robot: Teleop Tank", group="Robot")
-
+@Disabled
 public class RobotTeleopTank_Iterative extends OpMode{
-
     /* Declare OpMode members. */
     public DcMotor  leftDrive   = null;
     public DcMotor  rightDrive  = null;

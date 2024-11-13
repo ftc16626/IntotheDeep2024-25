@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode.outdated;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -63,6 +64,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @TeleOp(name="BallDrive", group="Linear OpMode")
+@Disabled
 public class BallDrive extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
