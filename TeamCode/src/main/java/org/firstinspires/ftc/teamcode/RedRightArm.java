@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Autonomous(name="RedRightArm", group="Shame")
+@Autonomous(name="RedRightArm1", group="Shame")
 
 public class RedRightArm extends LinearOpMode {
 
@@ -109,8 +109,10 @@ public class RedRightArm extends LinearOpMode {
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
         encoderDrive(DRIVE_SPEED, ROT_SPEED,  27.5, 27.5, 27.5,  27.5,false, 0, 0, 0,0, 5.0); //Forward
         encoderDrive(DRIVE_SPEED, ROT_SPEED,  0, 0, 0,  0,false, 87, 0, 0,0, 5.0); //Arm Rotate
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  22.5, 22.5, 22.5,  22.5,false, 0, 0, 0,0, 5.0); //Forward
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  22.5, 22.5, 22.5,  22.5,false, 0, 0, 0,0, 5.0); //Forward
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0, 0, 0,  0,false, 0, 15.5, 0,0, 5.0); //Arm Extend
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0, 0, 0,  0,false, -87, -15.5, 0,0, 5.0); //Arm Down
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  43.5, 43.5, 43.5,  43.5,true, 0, 0, 0,0, 5.0); //Strafe
+
 
         telemetry.addData("Path", "Complete");
 
