@@ -69,7 +69,7 @@ public class TestStrafeEncode extends LinearOpMode {
         LBMotor.setDirection(DcMotor.Direction.REVERSE);
         RFMotor.setDirection(DcMotor.Direction.FORWARD);
         RBMotor.setDirection(DcMotor.Direction.FORWARD);
-        rotateArm.setDirection(DcMotor.Direction.REVERSE);
+        rotateArm.setDirection(DcMotor.Direction.FORWARD);
         extendArm.setDirection(DcMotor.Direction.REVERSE);
 
         LFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
