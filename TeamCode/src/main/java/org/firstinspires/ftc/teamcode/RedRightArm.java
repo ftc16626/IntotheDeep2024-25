@@ -110,8 +110,35 @@ public class RedRightArm extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, ROT_SPEED,  27.5, 27.5, 27.5,  27.5,false, 0, 0, 0,0, 5.0); //Forward
         encoderDrive(DRIVE_SPEED, ROT_SPEED,  0, 0, 0,  0,false, 87, 0, 0,0, 5.0); //Arm Rotate
         encoderDrive(DRIVE_SPEED, ROT_SPEED,  0, 0, 0,  0,false, 0, 15.5, 0,0, 5.0); //Arm Extend
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0, 0, 0,  0,false, -87, -15.5, 0,0, 5.0); //Arm Down
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  43.5, 43.5, 43.5,  43.5,true, 0, 0, 0,0, 5.0); //Strafe
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0, 0, 0,  0,false, -87, -15.5, 1,-1, 5.0); //Arm Down
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -3, -3, -3,  -3,false, 0, 0, 0,0, 5.0); //Backward
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  45.5, 45.5, 45.5,  45.5,true, 0, 0, 0,0, 5.0); //Strafe Right
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  10, 10, 10,  10,false, 0, 0, 0,0, 5.0); //Forward
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  25, 25, -25,  -25,false, 0, 0, 0,0, 5.0); //Turn Right
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  30, 30, 30,  30,true, 0, 0, 0,0, 5.0); //Strafe Right
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -10, -10, -10,  -10,false, 0, 0, 0,0, 5.0); //Strafe Left
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  25, 25, -25,  -25,false, 0, 0, 0,0, 5.0); //Turn Right
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  13, 13, 13,  13,false, 37, 9, 1,-1, 5.0); //Grab Specimen
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -15, -15, -15,  -15,false, 0, 0, 0,0, 5.0); //Backward
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  40, 40, 40,  40,true, 0, 0, 0,0, 5.0); //Strafe Right
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -50, -50, -50,  -50,false, 0, 0, 0,0, 5.0); //Turn Around
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0, 0, 0,  0,false, 40, 15.5, 0,0, 5.0); //Arm Out
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0, 0, 0,  0,false, -77, -15.5, 1,-1, 5.0); //Arm In
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -20, -20, -20,  -20,false, 0, 0, 0,0, 5.0); //Backward
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,  36, 36, 36,  36,true, 0, 0, 0,0, 5.0); //Strafe Right
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         telemetry.addData("Path", "Complete");
