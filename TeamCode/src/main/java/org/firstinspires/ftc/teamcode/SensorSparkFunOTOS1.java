@@ -63,7 +63,7 @@ public class SensorSparkFunOTOS1 extends LinearOpMode {
                 RFMotor.setPower(0.5);
                 LBMotor.setPower(0.5);
                 RBMotor.setPower(0.5);
-                myOtos.getPosition();
+                pos = myOtos.getPosition();
                 if (pos.y >= 61) {
                     LFMotor.setPower(0);
                     RFMotor.setPower(0);

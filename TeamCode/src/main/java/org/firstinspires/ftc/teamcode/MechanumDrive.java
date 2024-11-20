@@ -34,6 +34,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 /*
  * This file contains an example of a Linear "OpMode".
@@ -163,8 +164,12 @@ public class MechanumDrive extends LinearOpMode {
             }
 
             if (gamepad2.right_bumper) {
+                sleep(250);
                 Wheel1.setPower(1);
-                Wheel2.setPower(-0.9);
+                Wheel2.setPower(-0.8);
+                sleep(250);
+                //Wheel1.setPower(1);
+                //Wheel2.setPower(-0.9);
             }  else {
                 Wheel1.setPower(0);
                 Wheel2.setPower(0);
