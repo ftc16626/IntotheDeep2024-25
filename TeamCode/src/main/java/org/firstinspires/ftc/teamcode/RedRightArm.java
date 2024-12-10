@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Autonomous(name="RedRightArm1", group="Shame")
+@Autonomous(name="RedRightArm", group="Shame")
 
 public class RedRightArm extends LinearOpMode {
 
@@ -107,25 +107,25 @@ public class RedRightArm extends LinearOpMode {
         LBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  24, 24, 24,  24,false, 86, 0, 0,0, 5.0); //Forward and Rotate
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0, 0, 0,  0,false, 0, 15.5, 0,0, 5.0); //Arm Extend
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0, 0, 0,  0,false, -10, -3, 0,0, 5.0); //Rotate Down
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0, 0, 0,  0,false, -76, -12.5, -1,1, 5.0); //Arm Down
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -1.5, -1.5, -1.5,  -1.5,false, 0, 0, 0,0, 5.0); //Backward
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  53.5, 53.5, 53.5,  53.5,true, 0, 0, 0,0, 5.0); //Strafe Right
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  15, 15, 15,  15,false, 0, 0, 0,0, 5.0); //Forward
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  25, 25, -25,  -25,false, 0, 0, 0,0, 5.0); //Turn Right
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  30, 30, 30,  30,true, 0, 0, 0,0, 5.0); //Strafe Right
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -10, -10, -10,  -10,false, 0, 0, 0,0, 5.0); //Strafe Left
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  25, 25, -25,  -25,false, 0, 0, 0,0, 5.0); //Turn Right
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  13, 13, 13,  13,false, 37, 9, 1,-1, 5.0); //Grab Specimen
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -15, -15, -15,  -15,false, 0, 0, 0,0, 5.0); //Backward
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  40, 40, 40,  40,true, 0, 0, 0,0, 5.0); //Strafe Right
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -50, -50, -50,  -50,false, 0, 0, 0,0, 5.0); //Turn Around
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0, 0, 0,  0,false, 40, 15.5, 0,0, 5.0); //Arm Out
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  0, 0, 0,  0,false, -77, -15.5, 1,-1, 5.0); //Arm In
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  -20, -20, -20,  -20,false, 0, 0, 0,0, 5.0); //Backward
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,  36, 36, 36,  36,true, 0, 0, 0,0, 5.0); //Strafe Right
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,24, 24, 24, 24, false, 86, 0, 0, 0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 0, false,0, 15.5, 0, 0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0 , 0, false, -12, -3, 0, 0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 0, false, -76, -12.5, -1, 1, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, -1.5, -1.5, -1.5, -1.5, false, 0, 0 , 0, 0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 50.5, 50.5, 50.5, 50.5, true, 0, 0, 0, 0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,25, 25, 25, 25, false, 0, 0, 0, 0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 15, 15, 15, 15, true, 0, 0, 0, 0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, -40, -40, -40, -40, false, 0, 0, 0, 0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 40, 40, 40, 40, false, 0, 0, 0, 0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 50, 50, -50, -50, false, 0, 0, 0, 0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 40, 40, 40, 40, false, 45, 8, -1, 1, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, -10, -10, -10, -10, false, 0, 0, 0, 0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,50, 50, 50, 50, true, 0, 0, 0, 0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 50, 50, -50, -50, false, 0, 0, 0, 0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 0, false, 40, 15.5, 0, 0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 0, false, -77, -15.5, 1, -1, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED,-20, -20, -20, -20, false, 0, 0, 0, 0, 5.0);
+        encoderDrive(DRIVE_SPEED, ROT_SPEED, 36, 36, 36, 36, true, 0, 0, 0, 0, 5.0);
 
 
 
@@ -140,8 +140,7 @@ public class RedRightArm extends LinearOpMode {
 
 
 
-
-        telemetry.addData("Path", "Complete");
+                telemetry.addData("Path", "Complete");
 
         telemetry.update();
         sleep(1000);  // pause to display final telemetry message.
