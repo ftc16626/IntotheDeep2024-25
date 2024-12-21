@@ -137,8 +137,8 @@ public class MechanumDrive extends LinearOpMode {
             double rightFrontPower = axial - lateral - yaw;
             double leftBackPower   = axial + lateral + yaw;
             double rightBackPower  = axial + lateral - yaw;
-            double armextPower  = gamepad2.right_stick_y;
-            double armrotPower  = gamepad2.left_stick_y;
+            double armextPower  = gamepad2.left_stick_y;
+            double armrotPower  = gamepad2.right_stick_y;
 
             // Normalize the values so no wheel power exceeds 100%
             // This ensures that the robot maintains the desired motion.
@@ -193,7 +193,7 @@ public class MechanumDrive extends LinearOpMode {
             }
             else {
                 rotateArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                rotateArm.setPower(armrotPower); // method not available in previous releases
+                rotateArm.setPower(0.1); // method not available in previous releases
             }
 
 
