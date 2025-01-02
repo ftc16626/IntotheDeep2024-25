@@ -20,6 +20,7 @@ public class RedRightArm extends LinearOpMode {
     private DcMotor         RBMotor  = null;
     private DcMotor         rotateArm = null;
     private DcMotor         extendArm = null;
+    private DcMotor         extendArm2 = null;
     CRServo Wheel1;
     CRServo Wheel2;
 
@@ -57,6 +58,7 @@ public class RedRightArm extends LinearOpMode {
         LFMotor = hardwareMap.get(DcMotor.class, "LFMotor");
         rotateArm = hardwareMap.get(DcMotor.class, "rotateArm");
         extendArm = hardwareMap.get(DcMotor.class, "extendArm");
+        extendArm2 = hardwareMap.get(DcMotor.class, "extendArm2");
         Wheel1 = hardwareMap.get(CRServo.class, "Wheel1");
         Wheel1.resetDeviceConfigurationForOpMode();
         Wheel2 = hardwareMap.get(CRServo.class, "Wheel2");
@@ -71,6 +73,7 @@ public class RedRightArm extends LinearOpMode {
         RBMotor.setDirection(DcMotor.Direction.FORWARD);
         rotateArm.setDirection(DcMotor.Direction.FORWARD);
         extendArm.setDirection(DcMotor.Direction.REVERSE);
+        extendArm2.setDirection(DcMotor.Direction.REVERSE);
 
         LFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         LBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -78,6 +81,7 @@ public class RedRightArm extends LinearOpMode {
         RBMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rotateArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         extendArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        extendArm2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         LFMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         LBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -85,6 +89,7 @@ public class RedRightArm extends LinearOpMode {
         RBMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rotateArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         extendArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        extendArm2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
         // Send telemetry message to indicate successful Encoder reset
@@ -94,7 +99,8 @@ public class RedRightArm extends LinearOpMode {
                           RFMotor.getCurrentPosition(),
                           RBMotor.getCurrentPosition(),
                           rotateArm.getCurrentPosition(),
-                          extendArm.getCurrentPosition());
+                          extendArm.getCurrentPosition(),
+                          extendArm2.getCurrentPosition());
         telemetry.update();
 
         // Wait for the game to start (driver presses START)
@@ -189,6 +195,7 @@ public class RedRightArm extends LinearOpMode {
             RBMotor.setTargetPosition(newRBTarget);
             rotateArm.setTargetPosition(newROTarget);
             extendArm.setTargetPosition(newEXTarget);
+            extendArm2.setTargetPosition(newEXTarget);
 
             // Turn On RUN_TO_POSITION
             LFMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -197,6 +204,7 @@ public class RedRightArm extends LinearOpMode {
             LBMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             rotateArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             extendArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            extendArm2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             // reset the timeout time and start motion.
             runtime.reset();
             LFMotor.setPower(Math.abs(speed));
@@ -205,6 +213,7 @@ public class RedRightArm extends LinearOpMode {
             RBMotor.setPower(Math.abs(speed));
             rotateArm.setPower(Math.abs(armspeed));
             extendArm.setPower(Math.abs(speed));
+            extendArm2.setPower(Math.abs(speed));
             Wheel1.setPower(wheel1Power);
             Wheel2.setPower(wheel2Power);
 
