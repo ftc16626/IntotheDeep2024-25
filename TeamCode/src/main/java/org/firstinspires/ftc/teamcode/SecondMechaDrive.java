@@ -73,7 +73,8 @@ public class SecondMechaDrive extends LinearOpMode {
     private DcMotor RFMotor = null;
     private DcMotor RBMotor = null;
     private DcMotor rotateArm = null;
-    private DcMotor extendArm = null;
+    private DcMotor extendArm2 = null;
+    private DcMotor extendArm1 = null;
     CRServo Wheel1;
     CRServo Wheel2;
 
@@ -82,12 +83,13 @@ public class SecondMechaDrive extends LinearOpMode {
 
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
-        LFMotor  = hardwareMap.get(DcMotor.class, "LFMotor");
-        LBMotor  = hardwareMap.get(DcMotor.class, "LBMotor");
+        LFMotor  = hardwareMap.get(DcMotor.class, "LBMotor");
+        LBMotor  = hardwareMap.get(DcMotor.class, "LFMotor");
         RFMotor = hardwareMap.get(DcMotor.class, "RFMotor");
         RBMotor = hardwareMap.get(DcMotor.class, "RBMotor");
         rotateArm = hardwareMap.get(DcMotor.class, "rotateArm");
-        extendArm = hardwareMap.get(DcMotor.class, "extendArm");
+        extendArm1 = hardwareMap.get(DcMotor.class, "extendArm");
+        extendArm2 = hardwareMap.get(DcMotor.class, "extendArm2");
         Wheel1 = hardwareMap.get(CRServo.class, "Wheel1");
         Wheel1.resetDeviceConfigurationForOpMode();
         Wheel2 = hardwareMap.get(CRServo.class, "Wheel2");
@@ -108,7 +110,8 @@ public class SecondMechaDrive extends LinearOpMode {
         RFMotor.setDirection(DcMotor.Direction.FORWARD);
         RBMotor.setDirection(DcMotor.Direction.FORWARD);
         rotateArm.setDirection(DcMotor.Direction.REVERSE);
-        extendArm.setDirection(DcMotor.Direction.FORWARD);
+        extendArm1.setDirection(DcMotor.Direction.FORWARD);
+        extendArm2.setDirection(DcMotor.Direction.REVERSE);
 
 
 
@@ -134,8 +137,8 @@ public class SecondMechaDrive extends LinearOpMode {
             double rightFrontPower = axial - lateral - yaw;
             double leftBackPower   = axial + lateral + yaw;
             double rightBackPower  = axial + lateral - yaw;
-            double armextPower  = gamepad2.right_stick_y;
-            double armrotPower  = gamepad2.left_stick_y;
+            double armextPower  = -gamepad2.right_stick_y;
+            double armrotPower  = -gamepad2.left_stick_y;
 
             // Normalize the values so no wheel power exceeds 100%
             // This ensures that the robot maintains the desired motion.
@@ -160,12 +163,8 @@ public class SecondMechaDrive extends LinearOpMode {
             }
 
             if (gamepad2.right_bumper) {
-                sleep(250);
                 Wheel1.setPower(1);
                 Wheel2.setPower(-0.8);
-                sleep(250);
-                //Wheel1.setPower(1);
-                //Wheel2.setPower(-0.9);
             }  else {
                 Wheel1.setPower(0);
                 Wheel2.setPower(0);
@@ -177,14 +176,15 @@ public class SecondMechaDrive extends LinearOpMode {
             RFMotor.setPower(rightFrontPower);
             LBMotor.setPower(leftBackPower);
             RBMotor.setPower(rightBackPower);
-            extendArm.setPower(armextPower);
+            extendArm1.setPower(armextPower);
+            extendArm2.setPower(armextPower);
             if ( armrotPower > 0 || armrotPower < 0) {
                 rotateArm.setPower(armrotPower);
 
             }
             else {
                 rotateArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                rotateArm.setPower(armrotPower); // method not available in previous releases
+                rotateArm.setPower(.03); // method not available in previous releases
             }
 
 

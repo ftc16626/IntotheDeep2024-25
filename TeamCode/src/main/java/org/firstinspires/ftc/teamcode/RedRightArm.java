@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Autonomous(name="RedRightArm", group="Shame")
+@Autonomous(name="RedRightArm", group="SecondBot")
 
 public class RedRightArm extends LinearOpMode {
 
@@ -71,8 +71,8 @@ public class RedRightArm extends LinearOpMode {
         LBMotor.setDirection(DcMotor.Direction.REVERSE);
         RFMotor.setDirection(DcMotor.Direction.FORWARD);
         RBMotor.setDirection(DcMotor.Direction.FORWARD);
-        rotateArm.setDirection(DcMotor.Direction.FORWARD);
-        extendArm.setDirection(DcMotor.Direction.REVERSE);
+        rotateArm.setDirection(DcMotor.Direction.REVERSE);
+        extendArm.setDirection(DcMotor.Direction.FORWARD);
         extendArm2.setDirection(DcMotor.Direction.REVERSE);
 
         LFMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -113,26 +113,26 @@ public class RedRightArm extends LinearOpMode {
         LBMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,23, 23, 23, 23, false, 79, 11.60 , 0, 0, 2.5); // Go to specimen rack, rotate & arm
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,0, 0, 0, 0, false, 0, 5, 0, 0, 1.5); // Finish extension
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0 , 0, false, -62, -15.5, -1, 1, 1.5); // Hook Specimen
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, -1.5, -1.5, -1.5 , -1.5, false, -20, 0 , 0, 0, 2.0); // Reverse
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 33.2, 33.2, 33.4, 33.4, true, 0, 0, 0, 0, 2.0); // Strafe right towards red sample's left side
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,25.5, 25.5, 25.5, 25.5, false, 0, 0, 0, 0, 2.0); // Go forward towards red sample
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 14.5, 14.5, 14.5, 14.5, true, 0, 0, 0, 0, 1.5); // Strafe right to get in front of sample
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, -40, -40, -40, -40, false, 0, 0, 0, 0, 2.0); // Reverse sample into human player area
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 20, 20, 20, 20, false, 0, 0, 0, 0, 2.0); // Go forward to allow specimen assembly
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 50, 50, -50, -50, false, 0, 0, 0, 0, 2.0); // Turn 180 degrees (now facing specimen on wall)
-        encoderDrive((DRIVE_SPEED * 0.5), ROT_SPEED, 22, 22, 22, 22, false, 39.0, 0, 0, 0, 2.0); // Go towards specimen on wall and intake
-        encoderDrive((DRIVE_SPEED * 0.4), ROT_SPEED, 0, 0, 0, 0, false, 0, 11.5, -1, 1, 1.0); // Go towards specimen on wall and intake
-        encoderDrive((DRIVE_SPEED * 0.4), ROT_SPEED, 0, 0, 0, 0, false, 5, 0, -1, 1, 0.5); // Rotate to pick specimen off wall
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, -9, -9, -9, -9, false, 0, 0, 0, 0, 1.5); // Reverse from wall
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,50, 50, 50, 50, true, 0, 0, 0, 0, 2.0); // Strafe right towards specimen rack
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 42, 42, -42, -42, false, 0, 0, 0, 0, 2.0); // Turn 180 degrees (now facing specimen rack)
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 0, false, 30.0, 15.5, 0, 0, 2.0); // Extend and rotate arm
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 0, false, -77, -15.5, 1, -1, 1.5); // Hook specimen to rack
-        encoderDrive(DRIVE_SPEED, ROT_SPEED,-20, -20, -20, -20, false, 0, 0, 0, 0, 0.0); // Reverse from rack
-        encoderDrive(DRIVE_SPEED, ROT_SPEED, 18, 18, 18, 18, true, 0, 0, 0, 0, 0.0); // Strafe right into parking
+        encoderDrive(0.7, ROT_SPEED,23, 23, 23, 23, false, 130, 13 , 0, 0, 5); // Go to specimen rack, rotate & arm
+        encoderDrive(0.7, ROT_SPEED,0, 0, 0, 0, false, 0, 5.5, 0, 0, 5); // Finish extension
+        encoderDrive(0.7, ROT_SPEED, 0, 0, 0 , 0, false, -62, -15.5, -1, 1, 5); // Hook Specimen
+        encoderDrive(0.7, ROT_SPEED, -1.5, -1.5, -1.5 , -1.5, false, -20, 0 , 0, 0, 5); // Reverse
+        encoderDrive(0.7, ROT_SPEED, 38, 38, 38, 38, true, 0, 0, 0, 0, 5); // Strafe right towards red sample's left side
+        encoderDrive(0.7, ROT_SPEED,-12, -12, -12, -12, false, 0, 0, 0, 0, 2.0); // Go forward towards red sample
+        //encoderDrive(DRIVE_SPEED, ROT_SPEED, 14.5, 14.5, 14.5, 14.5, true, 0, 0, 0, 0, 1.5); // Strafe right to get in front of sample
+        //encoderDrive(DRIVE_SPEED, ROT_SPEED, -40, -40, -40, -40, false, 0, 0, 0, 0, 2.0); // Reverse sample into human player area
+        //encoderDrive(DRIVE_SPEED, ROT_SPEED, 20, 20, 20, 20, false, 0, 0, 0, 0, 2.0); // Go forward to allow specimen assembly
+        //encoderDrive(DRIVE_SPEED, ROT_SPEED, 50, 50, -50, -50, false, 0, 0, 0, 0, 2.0); // Turn 180 degrees (now facing specimen on wall)
+        //encoderDrive((DRIVE_SPEED * 0.5), ROT_SPEED, 22, 22, 22, 22, false, 39.0, 0, 0, 0, 2.0); // Go towards specimen on wall and intake
+        //encoderDrive((DRIVE_SPEED * 0.4), ROT_SPEED, 0, 0, 0, 0, false, 0, 11.5, -1, 1, 1.0); // Go towards specimen on wall and intake
+        //encoderDrive((DRIVE_SPEED * 0.4), ROT_SPEED, 0, 0, 0, 0, false, 5, 0, -1, 1, 0.5); // Rotate to pick specimen off wall
+        //encoderDrive(DRIVE_SPEED, ROT_SPEED, -9, -9, -9, -9, false, 0, 0, 0, 0, 1.5); // Reverse from wall
+        //encoderDrive(DRIVE_SPEED, ROT_SPEED,50, 50, 50, 50, true, 0, 0, 0, 0, 2.0); // Strafe right towards specimen rack
+        //encoderDrive(DRIVE_SPEED, ROT_SPEED, 42, 42, -42, -42, false, 0, 0, 0, 0, 2.0); // Turn 180 degrees (now facing specimen rack)
+        //encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 0, false, 30.0, 15.5, 0, 0, 2.0); // Extend and rotate arm
+        //encoderDrive(DRIVE_SPEED, ROT_SPEED, 0, 0, 0, 0, false, -77, -15.5, 1, -1, 1.5); // Hook specimen to rack
+        //encoderDrive(DRIVE_SPEED, ROT_SPEED,-20, -20, -20, -20, false, 0, 0, 0, 0, 0.0); // Reverse from rack
+        //encoderDrive(DRIVE_SPEED, ROT_SPEED, 18, 18, 18, 18, true, 0, 0, 0, 0, 0.0); // Strafe right into parking
 
 
 
@@ -211,9 +211,9 @@ public class RedRightArm extends LinearOpMode {
             RFMotor.setPower(Math.abs(speed));
             LBMotor.setPower(Math.abs(speed));
             RBMotor.setPower(Math.abs(speed));
-            rotateArm.setPower(Math.abs(armspeed));
+            rotateArm.setPower(1 * Math.abs(armspeed));
             extendArm.setPower(Math.abs(speed));
-            extendArm2.setPower(Math.abs(speed));
+            extendArm2.setPower(1 * Math.abs(speed));
             Wheel1.setPower(wheel1Power);
             Wheel2.setPower(wheel2Power);
 
@@ -227,7 +227,7 @@ public class RedRightArm extends LinearOpMode {
             //onto the next step, use (isBusy() || isBusy()) in the loop test.
             while (opModeIsActive() &&
                    (runtime.seconds() < timeoutS) &&
-                   (LFMotor.isBusy() || rotateArm.isBusy() || extendArm.isBusy() || RFMotor.isBusy() || LBMotor.isBusy() || RBMotor.isBusy() )) {
+                   (LFMotor.isBusy() || rotateArm.isBusy() || extendArm.isBusy() ||extendArm2.isBusy() || RFMotor.isBusy() || LBMotor.isBusy() || RBMotor.isBusy() )) {
 
                 // Display it for the driver.
                 telemetry.addData("Running to",  " %7d :%7d", newLFTarget, newRFTarget,  newRBTarget,  newLBTarget);
